@@ -1,0 +1,62 @@
+﻿@model Mission06_Epling.Models.Movie
+
+@{
+    ViewData["Title"] = "Add a Movie";
+}
+
+<h2>Add a Movie</h2>
+
+<form asp-action="AddMovie" method="post" class="movie-form">
+    <div>
+        <label for="Title">Title:</label>
+        <input asp-for="Title" name="Title" required>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="Year">Year:</label>
+        <input asp-for="Year" name="Year" type="number" required>
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="Director">Director:</label>
+        <input asp-for="Director" name="Director" required>
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="Rating">Rating:</label>
+        <select asp-for="Rating" name="Rating">
+            <option value="">-- Select a Rating --</option>
+            <option>G</option>
+            <option>PG</option>
+            <option>PG-13</option>
+            <option>R</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="Edited">Edited:</label>
+        <input type="hidden" name="Edited" value="false" /> <!-- Ensures a value is always sent -->
+        <input asp-for="Edited" type="checkbox" />
+    </div>
+
+    <div>
+        <label for="LentTo">Lent To:</label>
+        <input asp-for="LentTo" name="LentTo">
+    </div>
+
+    <div>
+        <label for="Notes">Notes (Max 25 chars):</label>
+        <input asp-for="Notes" name="Notes" maxlength="25">
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
