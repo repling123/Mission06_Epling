@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mission06_Epling.Data;
 using Mission06_Epling.Models;
+using System.Linq;
 
 namespace Mission06_Epling.Controllers
 {
@@ -11,6 +12,12 @@ namespace Mission06_Epling.Controllers
         public MoviesController(MovieDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult MovieList()
+        {
+            var movies = _context.Movies.ToList();
+            return View(movies);
         }
 
         [HttpGet]
@@ -26,23 +33,49 @@ namespace Mission06_Epling.Controllers
             {
                 _context.Movies.Add(movie);
                 _context.SaveChanges();
-                Console.WriteLine("✅ Movie saved successfully!");
-
-                // Stay on AddMovie page instead of redirecting
-                return View();
+                return RedirectToAction("MovieList");
             }
 
-            // Show validation errors if they exist
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            // If validation fails, show the form again with errors
+            return View(movie);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var movie = _context.Movies.FirstOrDefault(m => m.MovieId == id);
+            if (movie == null)
             {
-                Console.WriteLine("❌ Validation Error: " + error.ErrorMessage);
+                return NotFound();
             }
+            return View(movie);
+        }
 
-            return View(movie); // Reload form with validation errors
+        [HttpPost]
+        public IActionResult Edit(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(movie);
+                _context.SaveChanges();
+                return RedirectToAction("MovieList");
+            }
+            return View(movie);
         }
 
 
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var movie = _context.Movies.Find(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
 
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return RedirectToAction("MovieList");
+        }
     }
 }
-

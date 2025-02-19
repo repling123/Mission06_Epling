@@ -1,60 +1,82 @@
 ﻿@model Mission06_Epling.Models.Movie
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @{
     ViewData["Title"] = "Add a Movie";
 }
 
-<h2>Add a Movie</h2>
+<h2 class="text-center my-4">Add a Movie</h2>
 
-<form asp-action="AddMovie" method="post" class="movie-form">
-    <div>
-        <label for="Title">Title:</label>
-        <input asp-for="Title" name="Title" required>
+<form asp-action="AddMovie" method="post" class="container w-50">
+    <div class="mb-3">
+        <label class="form-label">Title:</label>
+        <input asp-for="Title" class="form-control" required />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Year">Year:</label>
-        <input asp-for="Year" name="Year" type="number" required>
+    <div class="mb-3">
+        <label class="form-label">Year:</label>
+        <input asp-for="Year" type="number" class="form-control" min="1888" max="2100" required />
         <span asp-validation-for="Year" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Director">Director:</label>
-        <input asp-for="Director" name="Director" required>
-        <span asp-validation-for="Director" class="text-danger"></span>
+    <div class="mb-3">
+        <label class="form-label">Director:</label>
+        <input asp-for="Director" class="form-control" />
     </div>
 
-    <div>
-        <label for="Rating">Rating:</label>
-        <select asp-for="Rating" name="Rating">
-            <option value="">-- Select a Rating --</option>
+    <div class="mb-3">
+        <label class="form-label">Rating:</label>
+        <select asp-for="Rating" class="form-select">
+            <option value="">Select a Rating</option>
             <option>G</option>
             <option>PG</option>
             <option>PG-13</option>
             <option>R</option>
         </select>
-        <span asp-validation-for="Rating" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Edited">Edited:</label>
-        <input type="hidden" name="Edited" value="false" /> <!-- Ensures a value is always sent -->
-        <input asp-for="Edited" type="checkbox" />
+    <!-- Edited: Yes/No radio buttons -->
+    <div class="mb-3">
+        <label class="form-label">Edited:</label>
+        <div class="form-check">
+            <input type="radio" asp-for="Edited" class="form-check-input" value="true" required />
+            <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" asp-for="Edited" class="form-check-input" value="false" required />
+            <label class="form-check-label">No</label>
+        </div>
+        <span asp-validation-for="Edited" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="LentTo">Lent To:</label>
-        <input asp-for="LentTo" name="LentTo">
+    <!-- Copied to Plex: Yes/No radio buttons -->
+    <div class="mb-3">
+        <label class="form-label">Copied to Plex:</label>
+        <div class="form-check">
+            <input type="radio" asp-for="CopiedToPlex" class="form-check-input" value="true" required />
+            <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" asp-for="CopiedToPlex" class="form-check-input" value="false" required />
+            <label class="form-check-label">No</label>
+        </div>
+        <span asp-validation-for="CopiedToPlex" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Notes">Notes (Max 25 chars):</label>
-        <input asp-for="Notes" name="Notes" maxlength="25">
+    <div class="mb-3">
+        <label class="form-label">Lent To:</label>
+        <input asp-for="LentTo" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Notes (Max 25 characters):</label>
+        <input asp-for="Notes" class="form-control" maxlength="25" />
         <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-success">Submit</button>
 </form>
 
 @section Scripts {

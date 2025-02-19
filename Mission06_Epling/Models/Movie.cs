@@ -14,17 +14,19 @@ namespace Mission06_Epling.Models
         [Range(1888, 2100, ErrorMessage = "Year must be between 1888 and 2100.")]
         public int Year { get; set; }
 
-        [Required(ErrorMessage = "Director is required.")]
-        public string Director { get; set; }
+        public string? Director { get; set; }  // Optional
 
-        [Required(ErrorMessage = "Rating is required.")]
-        public string Rating { get; set; }
+        public string? Rating { get; set; }  // Optional
 
-        public bool? Edited { get; set; }
+        [Required(ErrorMessage = "You must select Yes or No for Edited.")]
+        public bool Edited { get; set; }
 
-        public string? LentTo { get; set; }
+        [Required(ErrorMessage = "You must select Yes or No for Copied to Plex.")]
+        public bool CopiedToPlex { get; set; }
+
+        public string? LentTo { get; set; }  // Optional
 
         [MaxLength(25, ErrorMessage = "Notes must be 25 characters or fewer.")]
-        public string? Notes { get; set; }
+        public string? Notes { get; set; }  // Optional
     }
 }

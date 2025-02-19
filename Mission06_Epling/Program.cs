@@ -31,3 +31,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Movies}/{action=MovieList}/{id?}");
+

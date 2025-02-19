@@ -1,0 +1,40 @@
+﻿@model Mission06_Epling.Models.Movie
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<div class="container text-center w-50">
+    <h2 class="my-4">Edit Movie</h2>
+
+    <form asp-action="Edit" asp-controller="Movies" method="post" class="d-flex flex-column align-items-center">
+        <!-- This hidden input ensures the correct MovieId is retained -->
+        <input type="hidden" asp-for="MovieId" />
+
+        <div class="mb-3 w-75">
+            <label class="form-label">Title:</label>
+            <input asp-for="Title" class="form-control" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 w-75">
+            <label class="form-label">Year:</label>
+            <input asp-for="Year" type="number" class="form-control" required min="1888" max="2100" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" asp-for="Edited" class="form-check-input" />
+            <label class="form-check-label">Edited</label>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" asp-for="CopiedToPlex" class="form-check-input" />
+            <label class="form-check-label">Copied to Plex</label>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+</div>

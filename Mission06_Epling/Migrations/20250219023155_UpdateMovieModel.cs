@@ -5,7 +5,7 @@
 namespace Mission06_Epling.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class UpdateMovieModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,9 +18,10 @@ namespace Mission06_Epling.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Year = table.Column<int>(type: "INTEGER", nullable: false),
-                    Director = table.Column<string>(type: "TEXT", nullable: false),
-                    Rating = table.Column<string>(type: "TEXT", nullable: false),
-                    Edited = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Director = table.Column<string>(type: "TEXT", nullable: true),
+                    Rating = table.Column<string>(type: "TEXT", nullable: true),
+                    Edited = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CopiedToPlex = table.Column<bool>(type: "INTEGER", nullable: false),
                     LentTo = table.Column<string>(type: "TEXT", nullable: true),
                     Notes = table.Column<string>(type: "TEXT", maxLength: 25, nullable: true)
                 },

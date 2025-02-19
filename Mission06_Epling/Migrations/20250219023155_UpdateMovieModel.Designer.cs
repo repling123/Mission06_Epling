@@ -10,8 +10,8 @@ using Mission06_Epling.Data;
 namespace Mission06_Epling.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20250212172139_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250219023155_UpdateMovieModel")]
+    partial class UpdateMovieModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,11 +25,13 @@ namespace Mission06_Epling.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("CopiedToPlex")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Director")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool?>("Edited")
+                    b.Property<bool>("Edited")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LentTo")
@@ -40,7 +42,6 @@ namespace Mission06_Epling.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
